@@ -1,8 +1,8 @@
 {
-  "name": "housebar",
+  "name": "la-taverne-de-ja-api",
   "version": "1.0.0",
-  "description": "House application to order unique & tasteful beverages",
-  "main": "index.js",
+  "description": "Api associée à l'application web La Taverne de J-A",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
