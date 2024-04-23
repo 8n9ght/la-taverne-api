@@ -31,7 +31,7 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ["GET", "POST"]
+  methods: ["GET", "POST", "PUT", "DELETE"]
 };
 
 require('dotenv').config()
