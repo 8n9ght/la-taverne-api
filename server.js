@@ -34,7 +34,7 @@ const userRouter = require('./routes/user')
 
 
 const corsOptions = {
-  origin: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'https://www.la-taverne-de-ja.fr',
+  origin: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'https://api.la-taverne-de-ja.fr',
   credentials: true,
 };
 
