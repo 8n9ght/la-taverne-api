@@ -52,9 +52,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json())
 
-app.use('/', (req, res) => {
-  res.send('Bienvenue dans l\'arrière boutique de la taverne !')
-})
+
 app.use('/cocktails', cocktailsRouter)
 app.use('/mocktails', mocktailsRouter)
 app.use('/shots', shotsRouter)
