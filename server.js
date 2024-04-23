@@ -13,6 +13,14 @@ admin.initializeApp({
 const app = express();
 const server = http.createServer(app);
 
+const io = socketIo(server, {
+  cors: {
+    origin: ["https://www.la-taverne-de-ja.fr", "http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
 const corsOptions = {
   origin: function (origin, callback) {
     const allowedOrigins = ['https://www.la-taverne-de-ja.fr', 'http://localhost:3000'];
@@ -25,8 +33,6 @@ const corsOptions = {
   credentials: true,
   methods: ["GET", "POST"]
 };
-
-const io = socketIo(server, corsOptions);
 
 require('dotenv').config()
 
