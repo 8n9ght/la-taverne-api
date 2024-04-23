@@ -15,7 +15,7 @@ const server = http.createServer(app);
 
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = ['http://localhost:3000', 'https://www.la-taverne-de-ja.fr'];
+    const allowedOrigins = ['https://www.la-taverne-de-ja.fr', 'http://localhost:3000'];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
