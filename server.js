@@ -12,13 +12,21 @@ admin.initializeApp({
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server, {
-  cors: {
-      origin: "http://localhost:3000",
-      methods: ["GET", "POST"],
-      credentials: true
-  }
-});
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://localhost:3000', 'https://www.la-taverne-de-ja.fr'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST"]
+};
+
+const io = socketIo(server, corsOptions);
 
 require('dotenv').config()
 
@@ -33,10 +41,7 @@ const orderRouter = require('./routes/orders')
 const userRouter = require('./routes/user')
 
 
-const corsOptions = {
-  origin: process.env.NODE_ENV === "development" ? 'http://localhost:3000' : 'https://www.la-taverne-de-ja.fr',
-  credentials: true,
-};
+
 
 app.use((req, res, next) => {
   req.io = io;
@@ -47,6 +52,9 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json())
 
+app.use('/', (req, res) => {
+  res.send('Bienvenue dans l\'arrière boutique de la taverne !')
+})
 app.use('/cocktails', cocktailsRouter)
 app.use('/mocktails', mocktailsRouter)
 app.use('/shots', shotsRouter)
