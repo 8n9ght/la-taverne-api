@@ -8,7 +8,7 @@ exports.getAllOrders = (req, res) => {
 };
 
 exports.createOrder = (req, res) => {
-  const { name, ingredients, client, token } = req.body;
+  const { name, ingredients, user, token } = req.body;
 
   if (!token) {
     console.error("Token manquant:", req.body);
@@ -23,7 +23,7 @@ exports.createOrder = (req, res) => {
     name,
     ingredients,
     status: "créée",
-    client,
+    user,
     token,
   });
 
@@ -35,7 +35,7 @@ exports.createOrder = (req, res) => {
 
       const message = {
         notification: {
-          title: `👋 Hello ${client} !`,
+          title: `👋 Hello ${user} !`,
           body: `Ta commande pour un ${name} a bien été créée.`,
         },
         token: token,
@@ -75,7 +75,7 @@ exports.createOrder = (req, res) => {
 
 exports.beginOrder = (req, res) => {
   const { id } = req.params;
-  const { name, client, token } = req.body;
+  const { name, user, token } = req.body;
 
   if (!token) {
     console.error("Token manquant:", req.body);
@@ -86,7 +86,7 @@ exports.beginOrder = (req, res) => {
 
   Order.findByIdAndUpdate(
     id,
-    { name, status: "en cours de préparation", client, token },
+    { name, status: "en cours de préparation", user, token },
     { new: true }
   )
     .then((order) => {
@@ -99,7 +99,7 @@ exports.beginOrder = (req, res) => {
       const message = {
         notification: {
           title: `🍹 Shake, shake, shake ! 🍸`,
-          body: `${client}, ton ${name} est ${order.status} !`,
+          body: `${user}, ton ${name} est ${order.status} !`,
         },
         token: token,
       };
@@ -126,7 +126,7 @@ exports.beginOrder = (req, res) => {
 
 exports.readyOrder = (req, res) => {
   const { id } = req.params;
-  const { name, client, token } = req.body;
+  const { name, user, token } = req.body;
 
   if (!token) {
     console.error("Token manquant:", req.body);
@@ -137,7 +137,7 @@ exports.readyOrder = (req, res) => {
 
   Order.findByIdAndUpdate(
     id,
-    { name, status: "prêt", client, token },
+    { name, status: "prêt", user, token },
     { new: true }
   )
     .then((order) => {
@@ -149,7 +149,7 @@ exports.readyOrder = (req, res) => {
 
       const message = {
         notification: {
-          title: `Bonne dégustation ${order.client} ! 😉`,
+          title: `Bonne dégustation ${order.user} ! 😉`,
           body: `Ton ${name} est ${order.status} viens le récupérer au bar ! 🤗`,
         },
         token: token,

@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
     type: String,
     required: false
   },
-  client: {
+  user: {
     type: String,
     required: true
   },
