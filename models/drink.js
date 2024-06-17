@@ -20,7 +20,12 @@ const drinkSchema = new mongoose.Schema({
   available: {
     type: Boolean,
     required: false
-  }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    required: true
+  },
 });
 
 module.exports = mongoose.model('Drink', drinkSchema);
