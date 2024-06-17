@@ -1,7 +1,7 @@
 const Mocktail = require('../models/drink');
 
 exports.getAllMocktails = (req, res) => {
-    Mocktail.find({category: 'mocktails'})
+    Mocktail.find({category: 'mocktails'}).sort({ name: 1 })
         .then((bucket) => res.status(200).json(bucket))
         .catch((err) => res.status(500).json({ error: err }))
 }

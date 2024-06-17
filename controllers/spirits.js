@@ -1,7 +1,7 @@
 const Spirit = require('../models/drink');
 
 exports.getAllSpirits = (req, res) => {
-    Spirit.find({category: 'spirits'})
+    Spirit.find({category: 'spirits'}).sort({ name: 1 })
         .then((bucket) => res.status(200).json(bucket))
         .catch((err) => res.status(500).json({ error: err }))
 }

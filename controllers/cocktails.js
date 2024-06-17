@@ -1,7 +1,7 @@
 const Cocktail = require('../models/drink');
 
 exports.getAllCocktails = (req, res) => {
-    Cocktail.find({category: 'cocktails'})
+    Cocktail.find({category: 'cocktails'}).sort({ name: 1 })
         .then((bucket) => res.status(200).json(bucket))
         .catch((err) => res.status(500).json({ error: err }))
 }

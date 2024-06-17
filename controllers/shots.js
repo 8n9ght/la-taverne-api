@@ -1,7 +1,7 @@
 const Shot = require('../models/drink');
 
 exports.getAllShots = (req, res) => {
-    Shot.find({category: 'shots'})
+    Shot.find({category: 'shots'}).sort({ name: 1 })
         .then((bucket) => res.status(200).json(bucket))
         .catch((err) => res.status(500).json({ error: err }))
 }
