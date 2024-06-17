@@ -87,24 +87,16 @@ exports.getAllDrinks = async (req, res) => {
 };
 
 exports.createDrink = (req, res) => {
-    const { name, ingredients, category, availability } = req.body;
+    const { name, ingredients, category, available } = req.body;
   
     let drink;
   
-    if (category === 'spirits') {
       drink = new Drink({
         name: name,
         ingredients: ingredients,
         category: category,
-        availability: availability,
+        available: available,
       });
-    } else {
-      drink = new Drink({
-        name: name,
-        ingredients: ingredients,
-        category: category,
-      });
-    }
   
     drink
       .save()
@@ -120,7 +112,7 @@ exports.createDrink = (req, res) => {
 exports.updateDrink = (req, res) => {
     const { id } = req.params;
   
-    const { name, ingredients, category, availability } = req.body;
+    const { name, ingredients, category, available } = req.body;
   
     Drink.findByIdAndUpdate(
       id,
@@ -128,7 +120,7 @@ exports.updateDrink = (req, res) => {
         name: name,
         ingredients: ingredients,
         category: category,
-        availability: availability,
+        available: available,
       },
       { new: true }
     )

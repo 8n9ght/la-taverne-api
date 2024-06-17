@@ -17,7 +17,7 @@ const drinkSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  availability: {
+  available: {
     type: Boolean,
     required: false
   }
